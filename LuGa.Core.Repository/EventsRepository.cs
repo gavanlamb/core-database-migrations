@@ -1,6 +1,7 @@
 ﻿using LuGa.Core.Device.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Dapper;
 using MySql.Data.MySqlClient;
 
@@ -34,13 +35,13 @@ namespace LuGa.Core.Repository
         /// Add Event
         /// </summary>
         /// <param name="row">Event object to save</param>
-        public void Add(Event row)
+        public async Task Add(Event row)
         {
             using (MySqlConnection dbConnection = Connection)
             {
                 const string sQuery = "INSERT INTO Events (DeviceId, Action, Zone, Value, TimeStamp) VALUES(@DeviceId, @Action, @Zone, @Value, @TimeStamp)";
-                dbConnection.OpenAsync();
-                dbConnection.Execute(sQuery, row);
+                await dbConnection.OpenAsync();
+                await dbConnection.ExecuteAsync(sQuery, row);
             }
         }
 
@@ -48,13 +49,13 @@ namespace LuGa.Core.Repository
         /// Retrieve all Events
         /// </summary>
         /// <returns>List of Events</returns>
-        public IEnumerable<Event> GetAll()
+        public async Task<IEnumerable<Event>> GetAll()
         {
             using (MySqlConnection dbConnection = Connection)
             {
                 const string sQuery = "SELECT * FROM Events";
-                dbConnection.OpenAsync();
-                return dbConnection.Query<Event>(sQuery);
+                await dbConnection.OpenAsync();
+                return await dbConnection.QueryAsync<Event>(sQuery);
             }
         }
 
@@ -63,13 +64,13 @@ namespace LuGa.Core.Repository
         /// </summary>
         /// <param name="id">Id of event to find</param>
         /// <returns>Found event or null</returns>
-        public Event GetById(int id)
+        public async Task<Event> GetById(int id)
         {
             using (MySqlConnection dbConnection = Connection)
             {
                 const string sQuery = "SELECT * FROM Events WHERE Id = @Id";
-                dbConnection.OpenAsync();
-                return dbConnection.Query<Event>(sQuery, new { Id = id }).FirstOrDefault();
+                await dbConnection.OpenAsync();
+                return await dbConnection.QueryFirstAsync<Event>(sQuery, new { Id = id });
             }
         }
     }

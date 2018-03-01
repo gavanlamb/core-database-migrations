@@ -1,6 +1,7 @@
 ﻿using LuGa.Core.Device.Models;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using Dapper;
 using MySql.Data.MySqlClient;
 
@@ -34,13 +35,13 @@ namespace LuGa.Core.Repository
         /// Add Reading
         /// </summary>
         /// <param name="row"></param>
-        public void Add(Reading row)
+        public async Task Add(Reading row)
         {
             using (MySqlConnection dbConnection = Connection)
             {
                 const string sQuery = "INSERT INTO Readings (ReadingType, DeviceId, Value, TimeStamp) VALUES(@ReadingType, @DeviceId, @Value, @TimeStamp)";
-                dbConnection.OpenAsync();
-                dbConnection.Execute(sQuery, row);
+                await dbConnection.OpenAsync();
+                await dbConnection.ExecuteAsync(sQuery, row);
             }
         }
 
@@ -48,13 +49,13 @@ namespace LuGa.Core.Repository
         /// Retrieve all Readings
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Reading> GetAll()
+        public async Task<IEnumerable<Reading>> GetAll()
         {
             using (MySqlConnection dbConnection = Connection)
             {
                 const string sQuery = "SELECT * FROM Readings";
-                dbConnection.OpenAsync();
-                return dbConnection.Query<Reading>(sQuery);
+                await dbConnection.OpenAsync();
+                return await dbConnection.QueryAsync<Reading>(sQuery);
             }
         }
 
@@ -63,13 +64,13 @@ namespace LuGa.Core.Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Reading GetById(int id)
+        public async Task<Reading> GetById(int id)
         {
             using (MySqlConnection dbConnection = Connection)
             {
                 const string sQuery = "SELECT * FROM Readings WHERE Id = @Id";
-                dbConnection.OpenAsync();
-                return dbConnection.Query<Reading>(sQuery, new { Id = id }).FirstOrDefault();
+                await dbConnection.OpenAsync();
+                return await dbConnection.QueryFirstAsync<Reading>(sQuery, new { Id = id });;  
             }
         }
     }

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Data;
+using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
 
 namespace LuGa.Core.Repository
@@ -19,19 +20,19 @@ namespace LuGa.Core.Repository
         /// Add single item
         /// </summary>
         /// <param name="row"></param>
-        void Add(T row);
+        Task Add(T row);
 
         /// <summary>
         /// Retrieve all items of said type
         /// </summary>
         /// <returns></returns>
-        IEnumerable<T> GetAll();
+        Task<IEnumerable<T>> GetAll();
 
         /// <summary>
         /// Get item by the specified Id
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        T GetById(int id);
+        Task<T> GetById(int id);
     }
 }
