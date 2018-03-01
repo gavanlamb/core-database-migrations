@@ -4,7 +4,7 @@
   </PropertyGroup>
   <ItemGroup>
     <PackageReference Include="Dapper" Version="1.50.4" />
-    <PackageReference Include="LuGa.Core.Models" Version="1.0.0-CI-20180227-123911" />
+    <PackageReference Include="LuGa.Core.Models" Version="1.0.1" />
     <PackageReference Include="MySql.Data" Version="6.10.6" />
   </ItemGroup>
 </Project>
