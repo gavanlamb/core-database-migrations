@@ -49,11 +49,11 @@ namespace LuGa.Core.Repository
         /// Retrieve all Events
         /// </summary>
         /// <returns>List of Events</returns>
-        public async Task<IEnumerable<Event>> GetAll()
+        public async Task<IEnumerable<Event>> GetTopHundred()
         {
             using (MySqlConnection dbConnection = Connection)
             {
-                const string sQuery = "SELECT * FROM Events";
+                const string sQuery = "SELECT * FROM luga.events ORDER BY TimeStamp DESC LIMIT 100";
                 await dbConnection.OpenAsync();
                 return await dbConnection.QueryAsync<Event>(sQuery);
             }

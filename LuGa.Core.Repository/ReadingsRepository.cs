@@ -49,11 +49,11 @@ namespace LuGa.Core.Repository
         /// Retrieve all Readings
         /// </summary>
         /// <returns></returns>
-        public async Task<IEnumerable<Reading>> GetAll()
+        public async Task<IEnumerable<Reading>> GetTopHundred()
         {
             using (MySqlConnection dbConnection = Connection)
             {
-                const string sQuery = "SELECT * FROM Readings";
+                const string sQuery = "SELECT * FROM luga.Readings ORDER BY TimeStamp DESC LIMIT 100";
                 await dbConnection.OpenAsync();
                 return await dbConnection.QueryAsync<Reading>(sQuery);
             }

@@ -23,10 +23,10 @@ namespace LuGa.Core.Repository
         Task Add(T row);
 
         /// <summary>
-        /// Retrieve all items of said type
+        /// Retrieve top 100 items ordering by the timestamp
         /// </summary>
         /// <returns></returns>
-        Task<IEnumerable<T>> GetAll();
+        Task<IEnumerable<T>> GetTopHundred();
 
         /// <summary>
         /// Get item by the specified Id
