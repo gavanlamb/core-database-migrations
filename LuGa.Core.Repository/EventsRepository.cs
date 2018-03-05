@@ -53,7 +53,7 @@ namespace LuGa.Core.Repository
         {
             using (MySqlConnection dbConnection = Connection)
             {
-                const string sQuery = "SELECT * FROM luga.events ORDER BY TimeStamp DESC LIMIT 100";
+                const string sQuery = "SELECT * FROM events ORDER BY TimeStamp DESC LIMIT 100";
                 await dbConnection.OpenAsync();
                 return await dbConnection.QueryAsync<Event>(sQuery);
             }
