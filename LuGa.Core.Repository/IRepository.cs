@@ -34,5 +34,13 @@ namespace LuGa.Core.Repository
         /// <param name="id"></param>
         /// <returns></returns>
         Task<T> GetById(int id);
+
+        /// <summary>
+        /// Generic query method
+        /// </summary>
+        /// <typeparam name="R"></typeparam>
+        /// <param name="query"></param>
+        /// <returns></returns>
+        Task<R> Query<R>(string query);
     }
 }

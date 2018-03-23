@@ -73,5 +73,19 @@ namespace LuGa.Core.Repository
                 return await dbConnection.QueryFirstAsync<Event>(sQuery, new { Id = id });
             }
         }
+
+        /// <summary>
+        /// Generic query method
+        /// </summary>
+        /// <typeparam name="R"></typeparam>
+        /// <param name="query"></param>
+        public async Task<R> Query<R>(string query)
+        {
+            using (MySqlConnection dbConnection = Connection)
+            {
+                await dbConnection.OpenAsync();
+                return await dbConnection.QueryFirstAsync<R>(query); ;
+            }
+        }
     }
 }
