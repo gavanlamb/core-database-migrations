@@ -1,6 +1,5 @@
-﻿using LuGa.Core.Device.Models;
+﻿using LuGa.Core.Models;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
 using MySql.Data.MySqlClient;
